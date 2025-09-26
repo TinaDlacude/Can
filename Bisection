@@ -1,0 +1,35 @@
+% Define the function
+f = @(x) x^3 - x - 2;
+
+% Define the interval [a, b]
+a = 1;
+b = 2;
+
+% Define the tolerance
+tol = 1e-10;
+
+% Check if the function values at a and b have opposite signs
+if f(a) * f(b) > 0
+    error('The function values at a and b must have opposite signs');
+end
+
+% Initialize the midpoint
+c = (a + b) / 2;
+
+% Iterate until the interval is smaller than the tolerance
+while abs(b - a) > tol
+    % Check if the root is in the left half or the right half
+    if f(c) == 0
+        break;
+    elseif f(a) * f(c) < 0
+        b = c;
+    else
+        a = c;
+    end
+    
+    % Update the midpoint
+    c = (a + b) / 2;
+end
+
+% Display the approximate root
+fprintf('The approximate root is: %.10f\n', c);
