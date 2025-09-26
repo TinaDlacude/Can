@@ -1,0 +1,18 @@
+f = @(x) x^3 - x - 2;
+df = @(x) 3*x^2 - 1;
+x0 = 0.5;
+tol = 1e-10;
+max_iter = 1000;
+iter = 0;
+
+x = x0;
+while iter < max_iter
+    x_next = x - f(x) / df(x);
+    if abs(x_next - x) < tol
+        break;
+    end
+    x = x_next;
+    iter = iter + 1;
+end
+
+fprintf('The approximate root is: %.10f\n', x);
